@@ -26,14 +26,14 @@ script:
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
   # Run role
-  - ansible-playbook tests/test.yml -i tests/inventory
+  - ansible-playbook tests/test.yml -i tests/inventory --connection=local
 
   # See if role actually did what we think it does
   - cat /tmp/hello.txt | grep -q "hello"
 
-  # Idempotence
+  # Idempotence test
   - >
-    ansible-playbook tests/test.yml -i tests/inventory
+    ansible-playbook tests/test.yml -i tests/inventory --connection=local
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
