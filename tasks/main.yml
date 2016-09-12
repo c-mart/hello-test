@@ -1,0 +1,7 @@
+---
+# tasks file for hello-test
+
+- name: place hello.txt
+  copy:
+    src: hello.txt
+    dest: /tmp/
